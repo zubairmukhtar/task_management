@@ -22,7 +22,10 @@
                 },
                 {
                     data: 'completed',
-                    name: 'completed'
+                    name: 'completed',
+                    render: function(data) {
+                        return data === 0 ? 'false' : 'true';
+                    }
                 },
             ]
         });

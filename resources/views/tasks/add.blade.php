@@ -44,8 +44,8 @@
                     <div class="form-group ">
                         <label for="completed">Completed</label>
                         <select class="form-control" name="completed">
-                            <option value="1">Pending</option>
-                            <option value="2">Completed</option>
+                            <option value="1">True</option>
+                            <option value="0">false</option>
                         </select>
                         <div class="invalid-feedback" id="completedError"></div>
                     </div>
