@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use \Yajra\Datatables\Datatables;
+use App\Http\Requests\TaskRequest;
 
 class TaskController extends Controller
 {
@@ -16,11 +17,9 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-             $data = Task::select('title','description','priority','due_date','completed');
-            return Datatables::of( $data)->make();
-
+            $data = Task::orderBy('priority','desc')->select('title', 'description', 'priority', 'due_date', 'completed');
+            return Datatables::of($data)->make();
         }
-
         return view('tasks.index');
     }
 
@@ -31,7 +30,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('tasks.add');
     }
 
     /**
@@ -40,9 +39,21 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+
+        // Insert the validated data into the database
+        $task = new Task();
+        $task->title = $validatedData['title'];
+        $task->description = $validatedData['description'];
+        $task->priority = $validatedData['priority'];
+        $task->due_date = $validatedData['due_date'];
+        $task->completed = $validatedData['completed'];
+        $task->save();
+
+        // Return a JSON response indicating success
+        return response()->json(['message' => 'Data stored successfully']);
     }
 
     /**

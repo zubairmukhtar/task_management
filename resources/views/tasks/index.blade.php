@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +11,13 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
 </head>
+
 <body>
+
     <div class="container mt-5">
-        <table id="tasksTable" class="table table-bordered table-striped">
+        <a href="{{ route('task.create') }}" class="btn btn-primary">Add Task</a>
+        <br>
+        <table id="tasksTable" class="table table-bordered table-striped mt-3">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -26,14 +31,13 @@
             </tbody>
         </table>
     </div>
-
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-        <!-- DataTables JS -->
+    <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 
     @include('tasks.includes.include')
-
 </body>
+
 </html>
